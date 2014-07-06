@@ -29,12 +29,12 @@ require([
     'collections/todos',
     'views/todo-view',
     'views/app-view',
-    'routers/router'
-  ], function($, Backbone, ModelTodo, CollectionTodo, TodoView, AppView ,Routers) {
-
-        var app = app || {};
+    'routers/router',
+    'app'
+  ], function($, Backbone, ModelTodo, CollectionTodo, TodoView, AppView ,Routers, app) {
+        
         var ENTER_KEY = 13;
         var ESC_KEY = 27;
-        new AppView();
+        console.log(app);
 
 });

@@ -1,6 +1,6 @@
 
-define(['underscore', 'backbone', 'collections/todos'], function(_ ,Backbone, todos) {
-	var AppView = Backbone.View.extend({
+define(['underscore', 'backbone', 'collections/todos', 'app'], function(_ ,Backbone, todos, app) {
+	 var AppView = Backbone.View.extend({
 
 		// Instead of generating a new element, bind to the existing skeleton of
 		// the App already present in the HTML.
@@ -90,7 +90,7 @@ define(['underscore', 'backbone', 'collections/todos'], function(_ ,Backbone, to
 		newAttributes: function () {
 			return {
 				title: this.$input.val().trim(),
-				order: todos.nextOrder(),
+				order: app.todos.nextOrder(),
 				completed: false
 			};
 		},
@@ -99,7 +99,7 @@ define(['underscore', 'backbone', 'collections/todos'], function(_ ,Backbone, to
 		// persisting it to *localStorage*.
 		createOnEnter: function (e) {
 			if (e.which === 13 && this.$input.val().trim()) {
-				todos.create(this.newAttributes());
+				app.todos.create(this.newAttributes());
 				this.$input.val('');
 			}
 		},

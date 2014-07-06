@@ -1,4 +1,4 @@
-define(['underscore', 'backbone', 'backbone.localStorage'], function(_, Backbone, BackboneLocalStorage) {
+define(['underscore','backbone'], function(_, Backbone) {
 	var Todo = Backbone.Model.extend({
 		defaults: {
 		  title: '',
@@ -10,7 +10,5 @@ define(['underscore', 'backbone', 'backbone.localStorage'], function(_, Backbone
 			});
 		}
 	});
-	return {
-    Model: Todo
-  };
+	return Todo;
 });
