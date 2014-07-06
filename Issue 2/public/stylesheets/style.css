@@ -125,7 +125,10 @@ label[for='toggle-all'] {
   left: -15px;
   width: 65px;
   height: 41px;
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
   transform: rotate(90deg);
+  -webkit-appearance: none;
   appearance: none;
 }
 #toggle-all:before {
@@ -175,6 +178,9 @@ label[for='toggle-all'] {
   bottom: 0;
   margin: auto 0;
   border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
   appearance: none;
   height: 40px;
 }
@@ -299,6 +305,9 @@ label[for='toggle-all'] {
 #info a {
   color: inherit;
 }
+.hidden {
+  display: none;
+}
 hr {
   margin: 20px 0;
   border: 0;
@@ -406,8 +415,4 @@ hr {
   transition-property: left;
   transition-duration: 500ms;
   left: 8px;
-}
-.learn-bar #todoapp {
-  width: 550px;
-  margin: 130px auto 40px auto;
 }
