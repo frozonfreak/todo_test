@@ -5,7 +5,9 @@ require.config({
         "jquery": "libs/jquery/jquery",
         "underscore": "../bower_components/underscore/underscore",
         "backbone": "../bower_components/backbone/backbone",
-        "backbone.localStorage": "../bower_components/backbone.localStorage/backbone.localStorage"
+        "backbone.localStorage": "../bower_components/backbone.localStorage/backbone.localStorage",
+        "react": "lib/react",
+        "JSXTransformer": "lib/JSXTransformer",
     },
     shim: {
         "backbone": {
@@ -13,6 +15,9 @@ require.config({
             deps: ["jquery", "underscore"],
                         //custom export name, this would be lowercase otherwise
             exports: "Backbone"
-        }
+        },
+        "react":{
+            "exports":"React"
+      }
     }
 });
