@@ -6,14 +6,7 @@ head
     link(rel='stylesheet', href='/bower_components/todomvc-common/base.css')
   body
     section#todoapp
-      header#header
-        h1 todos
-        input#new-todo(placeholder='What needs to be done?', autofocus='autofocus')
-      section#main
-        input#toggle-all(type='checkbox')
-        label(for='toggle-all') Mark all as complete
-        ul#todo-list
-      footer#footer
+      
     footer#info
       p Double-click to edit a todo
       p
@@ -22,37 +15,20 @@ head
       p
         | Part of
         a(href='http://todomvc.com') TodoMVC
-    script#item-template(type='text/template')
-      <div class="view">
-      <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
-      <label><%- title %></label>
-      <button class="destroy"></button>
-      </div>
-      <input class="edit" value="<%- title %>">
-    script#stats-template(type='text/template')
-      <span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
-      <ul id="filters">
-      <li>
-      <a class="selected" href="#/">All</a>
-      </li>
-      <li>
-      <a href="#/active">Active</a>
-      </li>
-      <li>
-      <a href="#/completed">Completed</a>
-      </li>
-      </ul>
-      <% if (completed) { %>
-      <button id="clear-completed">Clear completed (<%= completed %>)</button>
-      <% } %>
+    
     script(src='bower_components/todomvc-common/base.js')
+    script(src='bower_components/react/react-with-addons.js')
+    script(src='bower_components/react/JSXTransformer.js')
     script(src='bower_components/jquery/jquery.js')
     script(src='bower_components/underscore/underscore.js')
     script(src='bower_components/backbone/backbone.js')
     script(src='bower_components/backbone.localStorage/backbone.localStorage.js')
+
     script(src='js/models/todo.js')
     script(src='js/collections/todos.js')
-    script(src='js/views/todo-view.js')
-    script(src='js/views/app-view.js')
-    script(src='js/routers/router.js')
-    script(src='js/app.js')
+
+    script(type='text/jsx', src='js/jsx/todoItem.jsx')
+    script(type='text/jsx', src='js/jsx/footer.jsx')
+    script(type='text/jsx', src='js/jsx/app.jsx')
+    
+
