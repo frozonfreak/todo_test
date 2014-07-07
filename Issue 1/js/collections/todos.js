@@ -22,6 +22,14 @@ define(['underscore', 'backbone', 'backbone.localStorage', 'models/todo'], funct
 		},
 		comparator: function (todo) {
 			return todo.get('order');
+		},
+		//Get length of existing array
+		getlength: function(){
+			return this.length;
+		},
+		//Get the specific child to delete
+		getChild: function(val){
+			return this.models[val];
 		}
 	 });
 	

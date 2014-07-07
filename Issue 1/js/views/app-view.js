@@ -13,7 +13,7 @@ define(['underscore', 'backbone', 'collections/todos', 'views/todo-view', 'app']
 		events: {
 			'keypress #new-todo': 'createOnEnter',
 			'click #clear-completed': 'clearCompleted',
-			'click #toggle-all': 'toggleAllComplete'
+			'click #toggle-all': 'toggleAllComplete',
 		},
 
 		// At initialization we bind to the relevant events on the `Todos`
@@ -102,6 +102,14 @@ define(['underscore', 'backbone', 'collections/todos', 'views/todo-view', 'app']
 				todos.create(this.newAttributes());
 				this.$input.val('');
 			}
+			//Code for deletion via keyboard
+			else if(e.which > 48 && e.which<58){
+				//convert to num
+				var num = e.which-48;
+				if(num<todos.getlength()) //Assume list <10
+					_.invoke(todos.completed(), 'destroy');
+				return false;
+			}
 		},
 
 		// Clear all completed todo items, destroying their models.
@@ -109,7 +117,9 @@ define(['underscore', 'backbone', 'collections/todos', 'views/todo-view', 'app']
 			_.invoke(todos.completed(), 'destroy');
 			return false;
 		},
-
+		deleteSpecific: function(e){
+			console.log(e);
+		},
 		toggleAllComplete: function () {
 			var completed = this.allCheckbox.checked;
 
