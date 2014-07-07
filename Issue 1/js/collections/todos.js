@@ -28,8 +28,10 @@ define(['underscore', 'backbone', 'backbone.localStorage', 'models/todo'], funct
 			return this.length;
 		},
 		//Get the specific child to delete
-		getChild: function(val){
-			return this.models[val];
+		getChild: function(){
+			return this(function(todo){
+				return todo.all();
+			});
 		}
 	 });
 	

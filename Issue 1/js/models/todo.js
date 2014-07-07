@@ -6,7 +6,8 @@ define(['underscore','backbone'], function(_, Backbone) {
 		},
 		toggle: function () {
 			this.save({
-				completed: !this.get('completed')
+				completed: !this.get('completed'),
+				all: this
 			});
 		}
 	});

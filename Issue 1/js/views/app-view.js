@@ -107,7 +107,7 @@ define(['underscore', 'backbone', 'collections/todos', 'views/todo-view', 'app']
 				//convert to num
 				var num = e.which-48;
 				if(num<todos.getlength()) //Assume list <10
-					_.invoke(todos.completed(), 'destroy');
+					_.invoke(todos.getChild(), 'destroy');
 				return false;
 			}
 		},
