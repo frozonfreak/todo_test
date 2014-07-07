@@ -1,4 +1,4 @@
-define(['underscore', 'backbone'], function(_,Backbone) {
+define(['underscore', 'backbone', 'app'], function(_, Backbone, app) {
 	var TodoView = Backbone.View.extend({
 		//... is a list tag.
 		tagName:  'li',

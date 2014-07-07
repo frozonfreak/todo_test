@@ -1,5 +1,5 @@
 
-define(['underscore', 'backbone', 'collections/todos', 'app'], function(_ ,Backbone, todos, app) {
+define(['underscore', 'backbone', 'collections/todos', 'views/todo-view', 'app'], function(_ ,Backbone, todos, viewtodo, app) {
 	 var AppView = Backbone.View.extend({
 
 		// Instead of generating a new element, bind to the existing skeleton of
@@ -26,25 +26,25 @@ define(['underscore', 'backbone', 'collections/todos', 'app'], function(_ ,Backb
 			this.$main = this.$('#main');
 			this.$list = $('#todo-list');
 
-			this.listenTo(app.todos, 'add', this.addOne);
-			this.listenTo(app.todos, 'reset', this.addAll);
-			this.listenTo(app.todos, 'change:completed', this.filterOne);
-			this.listenTo(app.todos, 'filter', this.filterAll);
-			this.listenTo(app.todos, 'all', this.render);
+			this.listenTo(todos, 'add', this.addOne);
+			this.listenTo(todos, 'reset', this.addAll);
+			this.listenTo(todos, 'change:completed', this.filterOne);
+			this.listenTo(todos, 'filter', this.filterAll);
+			this.listenTo(todos, 'all', this.render);
 
 			// Suppresses 'add' events with {reset: true} and prevents the app view
 			// from being re-rendered for every model. Only renders when the 'reset'
 			// event is triggered at the end of the fetch.
-			app.todos.fetch({reset: true});
+			todos.fetch({reset: true});
 		},
 
 		// Re-rendering the App just means refreshing the statistics -- the rest
 		// of the app doesn't change.
 		render: function () {
-			var completed = app.todos.completed().length;
-			var remaining = app.todos.remaining().length;
+			var completed = todos.completed().length;
+			var remaining = todos.remaining().length;
 
-			if (app.todos.length) {
+			if (todos.length) {
 				this.$main.show();
 				this.$footer.show();
 
@@ -68,14 +68,14 @@ define(['underscore', 'backbone', 'collections/todos', 'app'], function(_ ,Backb
 		// Add a single todo item to the list by creating a view for it, and
 		// appending its element to the `<ul>`.
 		addOne: function (todo) {
-			var view = new app.TodoView({ model: todo });
+			var view = new viewtodo({ model: todo });
 			this.$list.append(view.render().el);
 		},
 
 		// Add all items in the **Todos** collection at once.
 		addAll: function () {
 			this.$list.html('');
-			app.todos.each(this.addOne, this);
+			todos.each(this.addOne, this);
 		},
 
 		filterOne: function (todo) {
@@ -83,14 +83,14 @@ define(['underscore', 'backbone', 'collections/todos', 'app'], function(_ ,Backb
 		},
 
 		filterAll: function () {
-			app.todos.each(this.filterOne, this);
+			todos.each(this.filterOne, this);
 		},
 
 		// Generate the attributes for a new Todo item.
 		newAttributes: function () {
 			return {
 				title: this.$input.val().trim(),
-				order: app.todos.nextOrder(),
+				order: todos.nextOrder(),
 				completed: false
 			};
 		},
@@ -99,21 +99,21 @@ define(['underscore', 'backbone', 'collections/todos', 'app'], function(_ ,Backb
 		// persisting it to *localStorage*.
 		createOnEnter: function (e) {
 			if (e.which === 13 && this.$input.val().trim()) {
-				app.todos.create(this.newAttributes());
+				todos.create(this.newAttributes());
 				this.$input.val('');
 			}
 		},
 
 		// Clear all completed todo items, destroying their models.
 		clearCompleted: function () {
-			_.invoke(app.todos.completed(), 'destroy');
+			_.invoke(todos.completed(), 'destroy');
 			return false;
 		},
 
 		toggleAllComplete: function () {
 			var completed = this.allCheckbox.checked;
 
-			app.todos.each(function (todo) {
+			todos.each(function (todo) {
 				todo.save({
 					completed: completed
 				});

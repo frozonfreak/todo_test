@@ -11,10 +11,9 @@ define(['jquery','backbone', 'collections/todos', 'app'], function($, Backbone, 
 			app.TodoFilter = param || '';
 			// Trigger a collection filter event, causing hiding/unhiding
 			// of Todo view items
-			app.todos.trigger('filter');
+			todos.trigger('filter');
 		}
 	});
 
-	app.TodoRouter = new TodoRouter();
-	Backbone.history.start();
+	return TodoRouter;
  });
